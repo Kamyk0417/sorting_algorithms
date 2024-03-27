@@ -7,9 +7,9 @@ def time_measure(func):
         start = time()
         val = func(*args,**kwargs)
         stop = time()
-        #print(f"time measured: {stop-start}")
         return val, stop-start
     return measured
+
 
 def bubble_sort(arr):
     n = len(arr)
@@ -19,6 +19,7 @@ def bubble_sort(arr):
                 arr[j], arr[j+1] = arr[j+1], arr[j]
 
     return arr
+
 
 def merge_sort(arr):
     if len(arr) > 1:
@@ -52,6 +53,7 @@ def merge_sort(arr):
 
     return arr
 
+
 def quick_sort(arr):
     if len(arr) <= 1: return arr
     pivot = arr[len(arr)//2]
@@ -59,6 +61,7 @@ def quick_sort(arr):
     mid = [x for x in arr if x == pivot]
     right = [x for x in arr if x > pivot]
     return quick_sort(left)+mid+quick_sort(right)
+
 
 def insert_sort(arr):
     for i in range(1, len(arr)):
@@ -69,6 +72,7 @@ def insert_sort(arr):
             j -= 1
         arr[j+1] = key
     return arr
+
 
 def bucket_sort(arr):
     max_val = max(arr)
@@ -89,14 +93,15 @@ def bucket_sort(arr):
 
     return sorted
 
+
 def heapify(arr,n,i):
     largest = i
-    l = 2*i+1
-    r = 2*i+2
-    if l<n and arr[l] > arr[largest]:
-        largest = l 
-    if r < n and arr[r] > arr[largest]:
-        largest = r
+    left = 2*i+1
+    right = 2*i+2
+    if left < n and arr[left] > arr[largest]:
+        largest = left 
+    if right < n and arr[right] > arr[largest]:
+        largest = right
     if largest != i:
         arr[i], arr[largest] = arr[largest], arr[i]
         heapify(arr, n, largest)
@@ -108,4 +113,5 @@ def heap_sort(arr):
     for i in range(n-1,0,-1):
         arr[i], arr[0] = arr[0], arr[i]
         heapify(arr,i,0)
+    
 
