@@ -16,14 +16,14 @@ def compare(alg1,alg2):
         mean1 = 0
         mean2 = 0
         x.append(j)
-        for i in range(1):
+        for i in range(10):
             rndarray = [randint(1, 100) for k in range(j)]
             time1 = alg1(rndarray)
             time2 = alg2(rndarray)
             mean1 += time1[1]
             mean2 += time2[1]
-        y1.append(mean1)
-        y2.append(mean2)
+        y1.append(mean1/10)
+        y2.append(mean2/10)
 
     return x, y1, y2
 
@@ -34,11 +34,11 @@ if alg != "compare":
     for j in range(100, 10000, 100):
         mean = 0
         x.append(j)
-        for i in range(1):
+        for i in range(10):
             rndarray = [randint(1, 100) for k in range(j)]
             time_dec = time_measure(alg_dict[alg])(rndarray)
             mean += time_dec[1]
-        y.append(mean)
+        y.append(mean/10)
     plt.scatter(x,y)
 
 if alg == "compare":
