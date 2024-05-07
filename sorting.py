@@ -54,13 +54,51 @@ def merge_sort(arr):
     return arr
 
 
+"""
 def quick_sort(arr):
     if len(arr) <= 1: return arr
+
     pivot = arr[len(arr)//2]
     left = [x for x in arr if x < pivot]
     mid = [x for x in arr if x == pivot]
     right = [x for x in arr if x > pivot]
-    return quick_sort(left)+mid+quick_sort(right)
+
+    return quick_sort(left) + mid + quick_sort(right)
+"""
+
+def quick_sort(arr):
+    #quick_ind ustala indeks pivota i wykonuje sortowanie "względem niego"
+    def quick_ind(arr, low, high):
+        #pivot ustalony jako środkowy wyraz listy
+        pivot = arr[(low+high)//2]
+        i = low - 1
+        j = high + 1
+        #indeks i leci od początku do pivota, a j od końca do pivota, jeżeli zarówno i jak i j znajdą liczbę "po złej stronie" 
+        #to zamienia te liczby ze sobą w liście i szuka dalej
+        while True:
+            i += 1
+            while arr[i] < pivot:
+                i+=1
+            j -= 1
+            while arr[j] > pivot:
+                j-=1
+            #jeżeli i i j się zrównają to znaczy że j jest indeksem pivota po uporządkowaniu
+            if i >= j:
+                return j
+            arr[i], arr[j] = arr[j], arr[i]
+    
+    def quick_sort_1(arr, low, high):
+        #if upewnia się, że lista zawiera co najmniej 2 elementy, inaczej rekurencja będzie szła w nieskończoność
+        if low < high:
+            #znalezienie indeksu pivota
+            pivot_ind = quick_ind(arr, low, high)
+            #powtórzenie procedury dla dwóch nowych fragmentów listy podzielonych pivotem
+            quick_sort_1(arr, low, pivot_ind)
+            quick_sort_1(arr, pivot_ind + 1, high)
+
+    #wystartowanie sortowania od pełnej listy, musiałem tak zrobić żeby główna funkcja sortująca przyjmowała tylko
+    #argument arr, żeby pasowała do schematu w pliku sorting_graphs
+    quick_sort_1(arr, 0, len(arr)-1)
 
 
 def insert_sort(arr):
